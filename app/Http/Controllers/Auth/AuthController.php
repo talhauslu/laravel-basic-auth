@@ -43,8 +43,7 @@ class AuthController extends Controller
 
         $user = User::query()->where('username', $request->username)->first();
         if(!$user) {
-            $request->session()->flash('error', ['Email veya şifre yanlış.']);
-            return view('auth.loginForm');
+            return back()->withErrors('Invalid username or password.');
         }
 
         if(Hash::check($request->password, $user->password)) {
@@ -52,11 +51,8 @@ class AuthController extends Controller
             return redirect()->route('dashboard',[$user->id]);
             Session::push('user', $user->username);
         } else {
-            $request->session()->flash('error', ['Email veya şifre yanlış.']);
-            return view('auth.loginform');
+            return back()->withErrors('Invalid username or password.');
         }
-
-        // return $request->username. " & " .$request->password;
     }
 
     public function logout() {
@@ -65,20 +61,7 @@ class AuthController extends Controller
     }
 
     public function dashboard(Request $request){
-
-        $data = Auth::user();
-
-        // if ($request->session()->has('users')) {
-            // $data = $request->session()->all();
-            // if (sizeof($data)) {
-            //     $data = 'dolu bu';
-            // }
-        // }
-        // else{
-        //      $data = 'deneme';
-        // }
-
-        return view('dashboard', ['data' => $data]);
+        return view('dashboard');
     }
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,6 @@ Route::get('/trends', function () {
     return view('trends');
 })->name('trends');
 Route::get('/profile', function () {
-    return view('profile');
+    return view('profile',['data' => Auth::user()]);
 })->middleware('auth')->name('profile');
 
