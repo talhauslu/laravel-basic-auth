@@ -14,7 +14,7 @@ class AuthController extends Controller
     public function registrationProcess(Request $request){
 
         $request->validate([
-            'username' => 'required|unique:users,email|min:3',
+            'username' => 'required|unique:users,username|min:3',
             'email' => 'required|unique:users,email|min:7',
             'password' => 'required|min:5|max:12',
             'password-check' => 'same:password',
