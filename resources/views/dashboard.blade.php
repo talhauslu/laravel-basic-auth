@@ -8,14 +8,4 @@
     @endif
     <h1>olduuuu</h1>
 
-
-    <p>{{$data}}</p>
-
-
-    {{-- @foreach ($data as $item)
-        <p>{{$item}}</p>
-    @endforeach --}}
-
-
-
 @endsection
