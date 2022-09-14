@@ -42,20 +42,27 @@
                     @guest
                         <li><a href="/explore" class="nav-link px-2 text-white">Keşfet</a></li>
                     @else
-                    <li><a href="/addcontent" class="nav-link px-2 text-white">İçerik ekle</a></li>
-                    <li><a href="/saved" class="nav-link px-2 text-white">Kaydettiklerim</a></li>
-                    <li><a href="/profile" class="nav-link px-2 text-white">Profilim</a></li>
+                        <li><a href="/addcontent" class="nav-link px-2 text-white">İçerik ekle</a></li>
+                        <li><a href="/saved" class="nav-link px-2 text-white">Kaydettiklerim</a></li>
+                        <li><a href="/profile" class="nav-link px-2 text-white">Profilim</a></li>
                     @endguest
+                    @if (Auth::user())
+                        @if (Auth::user()->role_id == 2)
+                            <li><a href="/admin" class="nav-link px-2 text-white">Admin Sayfası</a></li>
+                            <li><a href="/newuser" class="nav-link px-2 text-white">Kullanıcı Ekle</a></li>
+                        @endif
+                    @endif
+
 
                 </ul>
 
                 @auth
-                    <p style="margin-right: 20px; margin-top: 10px">{{Auth::user()->username}}</p>
+                    <p style="margin-right: 20px; margin-top: 10px">{{ Auth::user()->username }}</p>
                 @else
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="search" class="form-control form-control-dark" placeholder="Ara..."
-                        aria-label="Search">
-                </form>
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <input type="search" class="form-control form-control-dark" placeholder="Ara..."
+                            aria-label="Search">
+                    </form>
                 @endauth
 
                 @guest

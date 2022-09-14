@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -48,8 +47,7 @@ class AuthController extends Controller
 
         if(Hash::check($request->password, $user->password)) {
             Auth::login($user);
-            return redirect()->route('dashboard',[$user->id]);
-            Session::push('user', $user->username);
+            return redirect()->route('dashboard',);
         } else {
             return back()->withErrors('Invalid username or password.');
         }
@@ -60,7 +58,7 @@ class AuthController extends Controller
         return redirect()->route('loginform');
     }
 
-    public function dashboard(Request $request){
+    public function dashboard(){
         return view('dashboard');
     }
 
